@@ -12,7 +12,10 @@ gem 'sqlite3'
 gem 'bcrypt', '~> 3.1.7'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
+
+# Use paging with ActiveMOdels
+gem 'kaminari'
 
 # Use unicorn as the app server
 # gem 'unicorn'

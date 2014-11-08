@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: {format: 'json'} do
-      resources :users
+      get 'users', to: 'users#show'
+      get 'profile', to: 'users#profile'
+
+      resources :sports, only: [:index, :show]
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
