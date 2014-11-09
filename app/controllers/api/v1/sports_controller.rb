@@ -11,7 +11,7 @@ module Api
         if !@sport
           render json: {message: 'Invalid id'}, status: :not_found
         else
-          render 'sports/show', status: :ok
+          render json: @sport, status: :ok
         end
       end
     end
