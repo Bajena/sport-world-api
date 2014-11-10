@@ -1,8 +1,9 @@
 module Api
   module V1
-    class SportsController < ApplicationController
+    class SportsController < BaseController
       def index
-        render json: {sports: Sport.all}, status: :ok
+        @sports = Sport.all
+        render json: @sports, status: :ok, each_serializer: SportSerializer
       end
 
       def show
@@ -11,7 +12,7 @@ module Api
         if !@sport
           render json: {message: 'Invalid id'}, status: :not_found
         else
-          render json: @sport, status: :ok
+          render json: @sport, serializer: SportSerializer
         end
       end
     end
