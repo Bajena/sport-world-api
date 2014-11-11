@@ -2,7 +2,8 @@ module Api
   module V1
     class SportsController < BaseController
       def index
-        @sports = Sport.all
+        @sports = Sport.page(page).per(per_page)
+
         render json: @sports, status: :ok, each_serializer: SportSerializer
       end
 
