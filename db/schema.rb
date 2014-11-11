@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108122328) do
+ActiveRecord::Schema.define(version: 20141111122536) do
 
   create_table "auth_tokens", force: true do |t|
-    t.integer "user_id"
-    t.string  "token"
+    t.integer  "user_id"
+    t.string   "token"
+    t.datetime "valid_until"
   end
 
   add_index "auth_tokens", ["user_id"], name: "index_auth_tokens_on_user_id"

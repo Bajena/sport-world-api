@@ -5,10 +5,16 @@ class ApplicationController < ActionController::API
 
   def authenticate_with_token!
     auth_token = params[:auth_token].presence
-    token       = auth_token && AuthToken.find_by_token(auth_token.to_s)
+    token      = auth_token && AuthToken.find_by_token(auth_token.to_s)
     user = token && token.user
 
-    render json: {message: 'Invalid API Token'}, status: 401 if !user
+    now = DateTime.now
+
+    if !user
+      render json: {message: 'Invalid API Token'}, status: :unauthorized
+    elsif  (token.valid_until && token.valid_until < now)
+      render json: {message: 'Token expired'}, status: :unauthorized
+    end
 
     @current_user ||= user
   end

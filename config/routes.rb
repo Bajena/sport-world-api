@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: {format: 'json'} do
       get 'profile', to: 'users#profile'
+      get 'sign_in', to: 'users#sign_in'
+      get 'sign_up', to: 'users#sign_up'
 
       resources :sports, only: [:index, :show]
     end
