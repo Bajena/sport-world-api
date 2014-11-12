@@ -2,9 +2,8 @@ module Api
   module V1
     class SportsController < BaseController
       def index
-        @sports = Sport.page(page).per(per_page)
-
-        render json: @sports, status: :ok, each_serializer: SportSerializer
+        @sports = PaginatingDecorator.decorate(Sport.paginate(page: page, per_page: per_page))
+        render json: @sports, status: :ok, serializer: PaginatedSerializer
       end
 
       def show
@@ -13,7 +12,7 @@ module Api
         if !@sport
           render json: {message: 'Invalid id'}, status: :not_found
         else
-          render json: @sport, serializer: SportSerializer
+          render json: @sport, status: :ok
         end
       end
     end

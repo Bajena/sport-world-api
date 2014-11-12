@@ -13,8 +13,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'active_model_serializers', '~> 0.8.0'
 
-# Use paging with ActiveMOdels
-gem 'kaminari'
+# Use decorators
+gem 'draper', '~> 1.3'
+
+gem 'will_paginate'
 
 # Use unicorn as the app server
 # gem 'unicorn'

@@ -8,11 +8,11 @@ module Api
       end
 
       def per_page
-        params[:per_page] || DEFAULT_PER_PAGE
+        params[:per_page].is_a?(Integer) ? params[:per_page] : DEFAULT_PER_PAGE
       end
 
       def page
-        params[:page] || 1
+        params[:page].is_a?(Integer) ? params[:page] : 1
       end
     end
   end

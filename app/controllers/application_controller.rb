@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
     auth_token = params[:auth_token].presence
     token      = auth_token && AuthToken.find_by_token(auth_token.to_s)
     user = token && token.user
-
     now = DateTime.now
 
     if !user
