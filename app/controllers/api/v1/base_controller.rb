@@ -14,6 +14,10 @@ module Api
       def page
         params[:page].is_a?(Integer) ? params[:page] : 1
       end
+
+      def paginated_collection(collection)
+        PaginatingDecorator.decorate(collection.paginate(page: page, per_page: per_page))
+      end
     end
   end
 end

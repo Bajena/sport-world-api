@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111122536) do
+ActiveRecord::Schema.define(version: 20141112190635) do
 
   create_table "auth_tokens", force: true do |t|
     t.integer  "user_id"
@@ -35,6 +35,17 @@ ActiveRecord::Schema.define(version: 20141111122536) do
     t.date     "birth_date"
     t.integer  "weight"
     t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workouts", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "user_id"
+    t.integer  "sport_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

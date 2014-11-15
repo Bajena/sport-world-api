@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :auth_token, dependent: :destroy
+  has_many :workouts
 
   has_secure_password
 

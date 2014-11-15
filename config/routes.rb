@@ -1,11 +1,43 @@
 Rails.application.routes.draw do
   namespace :api do
+  namespace :v1 do
+    get 'workouts/index'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'workouts/show'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'workouts/destroy'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'workouts/create'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'workouts/update'
+    end
+  end
+
+  namespace :api do
     namespace :v1, defaults: {format: 'json'} do
       get 'profile', to: 'users#profile'
-      get 'sign_in', to: 'users#sign_in'
-      get 'sign_up', to: 'users#sign_up'
+      get 'profile/workouts', to: 'workouts#my_workouts'
+      post 'sign_in', to: 'users#sign_in'
+      post 'sign_up', to: 'users#sign_up'
 
       resources :sports, only: [:index, :show]
+      resources :workouts
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
