@@ -12,6 +12,11 @@ class Api::V1::WorkoutsController < Api::V1::BaseController
   end
 
   def show
+    if !params[:id] || !(@workout = Workout.find_by_id(params[:id]))
+      render json: { message: 'Invalid id'}, status: :bad_request
+    else
+      render json: @workout, includes: serializer_includes_list
+    end
   end
 
   def destroy
