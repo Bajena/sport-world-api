@@ -20,19 +20,43 @@ class Api::V1::WorkoutsController < Api::V1::BaseController
   end
 
   def destroy
+    if !params[:id] || !(@workout = Workout.find_by_id(params[:id])) || @workout.user != @current_user
+      render json: { message: 'Invalid id'}, status: :bad_request
+    else
+      Workout.destroy(@workout)
+      render json: { message: 'Workout deleted'}
+    end
   end
 
   def create
+    @workout = @current_user.workouts.create(workout_params(params))
 
+    if @workout
+      render json: @workout
+    else
+      render json: @workout.errors.messages
+    end
   end
 
   def update
+    if !params[:id] || !(@workout = Workout.find_by_id(params[:id])) || @workout.user != @current_user
+      render json: { message: 'Invalid id'}, status: :bad_request
+      return
+    end
+
+    @workout.update(workout_params(params))
+
+    if @workout
+      render json: @workout
+    else
+      render json: @workout.errors.messages
+    end
   end
 
   private
 
   def render_paginated_collection(collection)
-    render json: collection, status: :ok, serializer: PaginatedSerializer, each_serializer: WorkoutSerializer, includes: serializer_includes_list
+    render json: collection, serializer: PaginatedSerializer, each_serializer: WorkoutSerializer, includes: serializer_includes_list
   end
 
   def serializer_includes_list
@@ -45,6 +69,10 @@ class Api::V1::WorkoutsController < Api::V1::BaseController
 
   def filter_params(params)
     params.slice(:sport, :user)
+  end
+
+  def workout_params(params)
+    params.require(:workout).permit(:title, :description, :start_date, :end_date, :distance, :sport_id)
   end
 
   def filtered_collection

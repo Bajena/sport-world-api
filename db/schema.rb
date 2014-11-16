@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112190635) do
+ActiveRecord::Schema.define(version: 20141116113309) do
 
   create_table "auth_tokens", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20141112190635) do
     t.integer  "sport_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "distance"
   end
 
 end

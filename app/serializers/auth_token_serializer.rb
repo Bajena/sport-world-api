@@ -1,3 +1,3 @@
-class AuthTokenSerializer < ActiveModel::Serializer
-      attributes :token
+class AuthTokenSerializer < BaseSerializer
+  attributes :token
 end
